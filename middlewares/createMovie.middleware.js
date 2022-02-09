@@ -5,8 +5,6 @@ const movieValidator = require("../validators/movie.validator");
 module.exports = {
     createUserMiddleware: async (req, res, next) => {
         try {
-            const {title} = req.body;
-
             const {error, value} = await movieValidator.movieValidator.validate(req.body);
 
             if (error) {
@@ -16,10 +14,6 @@ module.exports = {
             await MovieModel.create({
                 ...value,
             });
-
-            const movieByTitle = await MovieModel.findOne({where: {title: title}});
-
-            req.movie = movieByTitle;
 
             next();
         } catch (e) {

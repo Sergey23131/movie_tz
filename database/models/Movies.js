@@ -22,10 +22,10 @@ Movies.init({
     Format: {
         type: DataTypes.STRING,
         allowNull: false,
-        enum: Object.values(filmFormat)
+        values: [filmFormat.BLU_Ray, filmFormat.DVD, filmFormat.VSH]
     },
     Stars: {
-        type: DataTypes.ARRAY(DataTypes.TEXT),
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
     },
 

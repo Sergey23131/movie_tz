@@ -32,7 +32,7 @@ module.exports = {
     createMovie: (req, res, next) => {
         try {
 
-            res.status(errors_code.UPDATE_DATA).json(req.movie);
+            res.status(errors_code.UPDATE_DATA).json('You add new film!');
         } catch (e) {
             next(e);
         }
