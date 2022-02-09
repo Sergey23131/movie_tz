@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 
 const {sequelize} = require('./database');
-const {userRouter, authRouter} = require('./routers');
+const {userRouter, authRouter, movieRouter} = require('./routers');
 const {PORT} = require('./configs/config');
 
 sequelize.sync().then(() => {
@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
-//app.use('/movies', userRouter);
+app.use('/movies', movieRouter);
 
 
 app.use('*', (err, req, res, next) => {

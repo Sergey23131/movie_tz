@@ -9,9 +9,7 @@ module.exports = {
     loginMiddleware: async (req, res, next) => {
         try {
 
-            const {email} = req.body;
-
-            const loginInfo = await UserModel.findOne({email});
+            const loginInfo = await UserModel.findOne({where:{email: req.body.email}});
 
             if (!loginInfo) {
                 throw new ErrorHandler(errors_massage.NOT_VALID_BODY, errors_code.NOT_VALID);

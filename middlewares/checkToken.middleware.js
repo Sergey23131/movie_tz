@@ -1,5 +1,5 @@
 const {AUTHORIZATION} = require('../configs/constants');
-const {errors_code, errors_massage,ErrorHandler} = require('../errors');
+const {errors_code, errors_massage, ErrorHandler} = require('../errors');
 const {jwtService} = require('../services');
 const {O_Auth} = require('../database/models');
 
@@ -15,8 +15,7 @@ module.exports = {
             await jwtService.verifyToken(token);
 
             const tokenResponse = await O_Auth
-                .findOne({access_token: token})
-                .populate('user_id');
+                .findOne({where: {access_token: token}});
 
             if (!tokenResponse) {
                 throw new ErrorHandler(errors_massage.NOT_VALID_TOKEN, errors_code.NOT_VALID);
@@ -24,7 +23,6 @@ module.exports = {
 
             req.user = tokenResponse.user_id;
             req.token = token;
-            req.tokenID = tokenResponse;
 
             next();
         } catch (e) {

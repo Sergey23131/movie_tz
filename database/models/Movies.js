@@ -15,8 +15,8 @@ Movies.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    Release_Year: {
-        type: DataTypes.STRING,
+    ReleaseYear: {
+        type: DataTypes.NUMBER,
         allowNull: false,
     },
     Format: {
@@ -25,7 +25,7 @@ Movies.init({
         enum: Object.values(filmFormat)
     },
     Stars: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.TEXT),
         allowNull: false,
     },
 

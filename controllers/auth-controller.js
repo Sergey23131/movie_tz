@@ -6,6 +6,7 @@ const {jwtService} = require('../services');
 module.exports = {
     authUsers: async (req, res, next) => {
         try {
+
             const tokenPair = jwtService.generateTokenPair();
 
             await O_Auth.create({
@@ -19,26 +20,21 @@ module.exports = {
                 }
             });
 
-            const a = await O_Auth.findByPk(req.user.id);
-            console.log(a)
-
             res.json({
                 user: oneUser,
                 ...tokenPair
             });
-
-            res.json();
         } catch (e) {
             next(e);
         }
     },
 
-    /*createUser: async (req, res, next) => {
+    createMovie: (req, res, next) => {
         try {
 
-            res.status(errors_code.UPDATE_DATA).json('');
+            res.status(errors_code.UPDATE_DATA).json(req.movie);
         } catch (e) {
             next(e);
         }
-    }*/
+    }
 };

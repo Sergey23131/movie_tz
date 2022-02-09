@@ -23,11 +23,10 @@ O_Auth.init({
     },
     user_id: {
         type: DataTypes.INTEGER,
-        references: UserModel,
-        referencesKey: 'id',
+        allowNull: false
+
     }
 
 }, {sequelize, timestamps: false, tableName: 'o_auth'});
-
 
 module.exports = O_Auth;

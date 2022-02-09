@@ -7,7 +7,6 @@ const userValidator = require('../validators/user.validator');
 module.exports = {
     createUserMiddleware: async (req, res, next) => {
         try {
-            const bodyEmail = req.body.email;
 
             const {error, value} = await userValidator.userValidator.validate(req.body);
 
@@ -15,13 +14,11 @@ module.exports = {
                 throw new ErrorHandler(errors_code.NOT_VALID, errors_massage.NOT_VALID_BODY);
             }
 
-            await UserModel.findOne({email:bodyEmail}).then(email=>{
-                console.log(email)
-                if (email){
-                    throw new ErrorHandler(errors_code.EXIST, errors_massage.EMAIL_EXIST);
+            const loginInfo = await UserModel.findOne({where:{email: req.body.email}});
 
-                }
-            });
+            if (loginInfo) {
+                throw new ErrorHandler(errors_massage.EMAIL_EXIST, errors_code.EXIST);
+            }
 
             req.body = value;
 
