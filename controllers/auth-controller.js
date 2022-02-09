@@ -10,7 +10,7 @@ module.exports = {
 
             await O_Auth.create({
                 ...tokenPair,
-                user_id: req.user._id
+                user_id: req.user.id
             });
 
             const oneUser = await UserModel.findByPk(req.user.id, {
@@ -19,9 +19,9 @@ module.exports = {
                 }
             });
 
-           /* const a = await O_Auth.findByPk(req.user.id);
+            const a = await O_Auth.findByPk(req.user.id);
             console.log(a)
-*/
+
             res.json({
                 user: oneUser,
                 ...tokenPair
