@@ -10,10 +10,10 @@ const {titleValidator} = require('../validators/title.validator');
 
 movieRouter.get('/', movieController.getAllMovies);
 
-movieRouter.get('/:movie_id', IdMiddleware.checkMovieID, movieController.getMovieByID);
-
-movieRouter.get('/ByTitle', isMovieBodyValid(titleValidator), movieController.getMovieByTitle);
+movieRouter.get('/ByTitle', isMovieBodyValid(titleValidator),movieController.getMovieByTitle);
 
 movieRouter.get('/ByStar', isMovieBodyValid(starValidator), movieController.getMovieByStar);
+
+movieRouter.get('/:movie_id', IdMiddleware.checkMovieID, movieController.getMovieByID);
 
 module.exports = movieRouter;

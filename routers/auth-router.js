@@ -6,6 +6,7 @@ const {movieValidator} = require('../validators/movie.validator');
 
 const createMovieMiddleware = require('../middlewares/createMovie.middleware');
 const loginMiddleware = require('../middlewares/login.middleware');
+const IdMiddleware = require("../middlewares/id.middleware");
 
 authRouter.post('/',
     loginMiddleware.isloginBodyValid,
@@ -13,10 +14,11 @@ authRouter.post('/',
     authController.authUsers);
 
 authRouter.post('/movieCreate',
-
     createMovieMiddleware.createUserMiddleware,
     authController.createMovie);
 
-authRouter.post('/movieDelete/:movie_id');
+authRouter.delete('/movieDelete/:movie_id',
+    IdMiddleware.checkMovieID,
+    authController.deleteMovie);
 
 module.exports = authRouter;

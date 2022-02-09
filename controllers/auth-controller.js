@@ -1,4 +1,4 @@
-const {O_Auth, UserModel} = require('../database/models/');
+const {O_Auth, UserModel, MovieModel} = require('../database/models/');
 
 const {errors_code, ErrorHandler, errors_massage} = require('../errors');
 const {jwtService} = require('../services');
@@ -33,6 +33,17 @@ module.exports = {
         try {
 
             res.status(errors_code.UPDATE_DATA).json('You add new film!');
+        } catch (e) {
+            next(e);
+        }
+    },
+    deleteMovie: async (req, res, next) => {
+        try {
+            const {movie_id} = req.params;
+
+            await MovieModel.destroy({where: {id: movie_id}});
+
+            res.status(errors_code.UPDATE_DATA).json('Film was removed');
         } catch (e) {
             next(e);
         }

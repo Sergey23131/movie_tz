@@ -1,5 +1,4 @@
 const {sequelize} = require('../index');
-const filmFormat = require('../../configs/FormatsOfFilms');
 const {Model, DataTypes} = require('sequelize');
 
 class Movies extends Model {
@@ -22,10 +21,9 @@ Movies.init({
     Format: {
         type: DataTypes.STRING,
         allowNull: false,
-        values: [filmFormat.BLU_Ray, filmFormat.DVD, filmFormat.VSH]
     },
     Stars: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.JSON,
         allowNull: false,
     },
 

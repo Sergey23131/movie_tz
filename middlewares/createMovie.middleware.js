@@ -1,7 +1,9 @@
 const {MovieModel} = require('../database/models');
 
 const {ErrorHandler, errors_code, errors_massage} = require('../errors');
-const movieValidator = require("../validators/movie.validator");
+const movieValidator = require('../validators/movie.validator');
+
+
 module.exports = {
     createUserMiddleware: async (req, res, next) => {
         try {

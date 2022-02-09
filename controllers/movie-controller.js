@@ -28,7 +28,7 @@ module.exports = {
 
     getMovieByTitle: async (req, res, next) => {
         try {
-            const {title} = req.body;
+            const title = req.body.Title;
 
             const movieByTitle = await MovieModel.findOne({where: {Title: title}});
 
@@ -40,9 +40,9 @@ module.exports = {
 
     getMovieByStar: async (req, res, next) => {
         try {
-            const {stars} = req.body;
+            const {Star} = req.body;
 
-            const movieByStar = await MovieModel.findAll({where: {Stars: stars}});
+            const movieByStar = await MovieModel.findAll({where: {Stars: {$like: [Star ]}}});
 
             res.json(movieByStar);
         } catch (e) {
