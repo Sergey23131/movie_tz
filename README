@@ -1,0 +1,5 @@
+Запуск: -node app
+
+Запуск образа -docker build
+-docker image ls
+-docker run (+id from image)
