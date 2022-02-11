@@ -10,20 +10,20 @@ Movies.init({
         primaryKey: true,
         autoIncrement: true
     },
-    Title: {
+    title: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    ReleaseYear: {
+    releaseYear: {
         type: DataTypes.NUMBER,
         allowNull: false,
     },
-    Format: {
+    format: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    Stars: {
-        type: DataTypes.JSON,
+    stars: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
 

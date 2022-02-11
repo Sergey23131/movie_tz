@@ -2,8 +2,6 @@ const {DataTypes, Model} = require('sequelize');
 
 const {sequelize} = require('../index');
 
-const {UserModel} = require('../models');
-
 class O_Auth extends Model {
 }
 

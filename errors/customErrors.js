@@ -8,4 +8,6 @@ module.exports = {
     NOT_VALID_ID:'Not valid ID',
     REMOVE_MOVIE: 'Movie was removed',
     FORGOT_PASSWORD: 'User not found',
+    WRONG_FORMAT:'Your format is not supported',
+    MAX_SIZE:'File is too big'
 };

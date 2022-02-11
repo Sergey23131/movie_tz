@@ -4,6 +4,7 @@ const express = require('express');
 const {sequelize} = require('./database');
 const {userRouter, authRouter, movieRouter} = require('./routers');
 const {PORT} = require('./configs/config');
+const fileUpload = require('express-fileupload');
 
 sequelize.sync().then(() => {
     console.log('db is ready');
@@ -11,6 +12,7 @@ sequelize.sync().then(() => {
 
 const app = express();
 
+app.use(fileUpload());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 

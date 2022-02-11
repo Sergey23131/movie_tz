@@ -1,6 +1,6 @@
 const {O_Auth, UserModel, MovieModel} = require('../database/models/');
 
-const {errors_code, ErrorHandler, errors_massage} = require('../errors');
+const {errors_code} = require('../errors');
 const {jwtService} = require('../services');
 
 module.exports = {
@@ -44,6 +44,14 @@ module.exports = {
             await MovieModel.destroy({where: {id: movie_id}});
 
             res.status(errors_code.UPDATE_DATA).json('Film was removed');
+        } catch (e) {
+            next(e);
+        }
+    },
+    loadFile: (req, res, next) => {
+        try {
+
+            res.status(errors_code.UPDATE_DATA).json('Movies was added into our database');
         } catch (e) {
             next(e);
         }

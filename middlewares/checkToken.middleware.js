@@ -2,6 +2,7 @@ const {AUTHORIZATION} = require('../configs/constants');
 const {errors_code, errors_massage, ErrorHandler} = require('../errors');
 const {jwtService} = require('../services');
 const {O_Auth} = require('../database/models');
+const {where} = require("sequelize");
 
 module.exports = {
     checkAccessToken: async (req, res, next) => {
@@ -41,7 +42,7 @@ module.exports = {
             await jwtService.verifyToken(token, tokenType.REFRESH);
 
             const tokenResponse = await O_Auth
-                .findOne({refresh_token: token});
+                .findOne({where:{refresh_token: token}});
 
             if (!tokenResponse) {
                 throw new ErrorHandler(errors_massage.NOT_VALID_TOKEN, errors_code.NOT_VALID);

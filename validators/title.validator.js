@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const titleValidator = Joi.object({
-    Title: Joi
+    title: Joi
         .string()
         .trim()
         .required()

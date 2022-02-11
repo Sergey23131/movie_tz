@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const {errors_massage, errors_code, ErrorHandler} = require('../errors');
-const {JWT_ACCESS_SECRET, JWT_REFRESH_SECRET, JWT_FORGOT_PASSWORD} = require('../configs/config');
+const {JWT_ACCESS_SECRET, JWT_REFRESH_SECRET} = require('../configs/config');
 const {ACCESS, REFRESH} = require('../configs/tokenType');
 
 

@@ -3,18 +3,18 @@ const Joi = require('joi');
 const filmFormat = require('../configs/FormatsOfFilms');
 
 const movieValidator = Joi.object({
-    Title: Joi
+    title: Joi
         .string()
         .trim()
         .required(),
-    ReleaseYear: Joi
+    releaseYear: Joi
         .number()
         .required(),
-    Format: Joi
+    format: Joi
         .string()
         .allow(...Object.values(filmFormat)),
-    Stars: Joi
-        .array().items(Joi.string())
+    stars: Joi
+        .string()
         .required(),
 });
 

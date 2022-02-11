@@ -1,6 +1,6 @@
 const {UserModel} = require('../database/models');
 const {passwordService} = require('../services');
-const {errors_code, ErrorHandler, errors_massage} = require('../errors');
+const {errors_code} = require('../errors');
 
 module.exports = {
     getUsers: async (req, res, next) => {

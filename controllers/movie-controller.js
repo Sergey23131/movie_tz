@@ -1,13 +1,13 @@
 const {MovieModel} = require('../database/models/');
 
-const {errors_code, ErrorHandler, errors_massage} = require('../errors');
+const {Op} = require('sequelize');
 
 module.exports = {
     getAllMovies: async (req, res, next) => {
         try {
             const AllMovies = await MovieModel.findAll({
                 order: [
-                    ['Title', 'DESC']
+                    ['Title', 'ASC']
                 ]
             });
 
@@ -28,9 +28,9 @@ module.exports = {
 
     getMovieByTitle: async (req, res, next) => {
         try {
-            const title = req.body.Title;
+            const titleBody = req.body.title;
 
-            const movieByTitle = await MovieModel.findOne({where: {Title: title}});
+            const movieByTitle = await MovieModel.findOne({where: {title: titleBody}});
 
             res.json(movieByTitle);
         } catch (e) {
@@ -40,9 +40,9 @@ module.exports = {
 
     getMovieByStar: async (req, res, next) => {
         try {
-            const {Star} = req.body;
+            const {star} = req.body;
 
-            const movieByStar = await MovieModel.findAll({where: {Stars: {$like: [Star ]}}});
+            const movieByStar = await MovieModel.findAll({where: {stars:  { [Op.like]: `%${star}%`} }});
 
             res.json(movieByStar);
         } catch (e) {

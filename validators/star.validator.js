@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const starValidator = Joi.object({
-    Star: Joi
+    star: Joi
         .string()
         .trim()
         .required(),
