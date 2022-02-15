@@ -1,6 +1,6 @@
 FROM node:16
 
-WORKDIR /usr/src/app
+WORKDIR /movie_tz
 
 COPY package*.json ./
 
@@ -10,5 +10,5 @@ COPY . .
 
 EXPOSE 5000
 
-CMD [ "node", "server.js" ]
+CMD [ "node", "app.js" ]
 
