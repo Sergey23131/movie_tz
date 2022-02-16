@@ -14,10 +14,14 @@ authRouter.post('/',
 
 authRouter.post('/movieCreate',
     checkTockenMiddleware.checkAccessToken,
-    createMovieMiddleware.createUserMiddleware,
+    createMovieMiddleware.createMovieMiddleware,
     authController.createMovie);
 
-authRouter.post('/loadFile',checkTockenMiddleware.checkAccessToken, fileMiddleware.readfile, authController.loadFile);
+authRouter.post('/loadFile',
+    fileMiddleware.checkfile,
+    checkTockenMiddleware.checkAccessToken,
+    fileMiddleware.readfile,
+    authController.loadFile);
 
 authRouter.delete('/movieDelete/:movie_id',
     checkTockenMiddleware.checkAccessToken,

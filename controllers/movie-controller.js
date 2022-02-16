@@ -1,17 +1,15 @@
 const {MovieModel} = require('../database/models/');
 
 const {Op} = require('sequelize');
+const {movieService} = require('../services/index');
 
 module.exports = {
     getAllMovies: async (req, res, next) => {
         try {
-            const AllMovies = await MovieModel.findAll({
-                order: [
-                    ['Title', 'ASC']
-                ]
-            });
 
-            res.json(AllMovies);
+            const allMovies = await movieService.getAllMovies(req.query);
+
+            res.json(allMovies);
         } catch (e) {
             next(e);
         }
@@ -30,7 +28,7 @@ module.exports = {
         try {
             const titleBody = req.body.title;
 
-            const movieByTitle = await MovieModel.findOne({where: {title: titleBody}});
+            const movieByTitle = await MovieModel.findOne({where: {title: {[Op.like]: `%${titleBody}%`}}});
 
             res.json(movieByTitle);
         } catch (e) {
@@ -42,7 +40,7 @@ module.exports = {
         try {
             const {star} = req.body;
 
-            const movieByStar = await MovieModel.findAll({where: {stars:  { [Op.like]: `%${star}%`} }});
+            const movieByStar = await MovieModel.findAll({where: {stars: {[Op.like]: `%${star}%`}}});
 
             res.json(movieByStar);
         } catch (e) {

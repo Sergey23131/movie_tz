@@ -4,20 +4,21 @@ const {DOCS_MIMETYPES, FILE_MAX_SIZE} = require('../configs/constants');
 const fs = require('fs').promises;
 const path = require('path');
 const {MovieModel} = require('../database/models');
+const movieValidator = require('../validators/movie.validator');
 
 
 module.exports = {
     checkfile: (req, res, next) => {
         try {
-            const {avatar} = req.files || {};
+            const {txt} = req.files || {};
 
-            if (!avatar) {
+            if (!txt) {
                 next();
                 return;
             }
 
-            const {size, mimetype} = avatar;
-
+            const {size, mimetype} = txt;
+console.log(mimetype,size)
             if (!DOCS_MIMETYPES.includes(mimetype)) {
                 throw new ErrorHandler(errors_massage.WRONG_FORMAT, errors_code.NOT_VALID);
             }
@@ -50,27 +51,35 @@ module.exports = {
                     .forEach(string => {
                         const arrayFromStr = string.split(': ');
 
-
                         if (arrayFromStr.length <= 1) {
                             movies.push(movieBuffer);
                             movieBuffer = {};
                             return;
                         }
-
                         if (fields.includes(arrayFromStr[0])) {
                             movieBuffer[arrayFromStr[0].charAt(0).toLowerCase() + arrayFromStr[0].slice(1).split(' ')
                                 .join('')] = arrayFromStr[1];
                         }
+
+                        if (fields.includes(arrayFromStr[0])&&arrayFromStr[2]) {
+                            movieBuffer[arrayFromStr[0].charAt(0).toLowerCase() + arrayFromStr[0].slice(1).split(' ')
+                                .join('')] = arrayFromStr[1]+': '+arrayFromStr[2];
+                        }
+
                     });
 
                 for (const movie of movies) {
-                    if (movie.title) {
-                        await MovieModel.create({
-                            title: `${movie.title}`,
-                            releaseYear: `${+movie.releaseYear}`,
-                            format: `${movie.format}`,
-                            stars: `${[movie.stars]}`
 
+                    if (movie.title) {
+
+                        const {error, value} = await movieValidator.movieValidator.validate(movie);
+
+                        if (error) {
+                            throw new ErrorHandler(errors_code.NOT_VALID, errors_massage.NOT_VALID_DATA);
+                        }
+
+                        await MovieModel.create({
+                            ...value
                         });
                     }
                 }

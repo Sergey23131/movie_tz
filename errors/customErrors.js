@@ -1,7 +1,7 @@
 module.exports = {
     UPDATE_DATA: 'You made update of database',
     EMAIL_EXIST: 'Email already exists',
-    NOT_VALID_BODY: 'Wrong email or password',
+    NOT_VALID_BODY: 'Wrong name,email or password',
     NOT_VALID_DATA:'Not valid Info',
     NOT_FOUND_USER: 'User dosent exist',
     NOT_VALID_TOKEN: 'Not valid token',
@@ -9,5 +9,8 @@ module.exports = {
     REMOVE_MOVIE: 'Movie was removed',
     FORGOT_PASSWORD: 'User not found',
     WRONG_FORMAT:'Your format is not supported',
-    MAX_SIZE:'File is too big'
+    MAX_SIZE:'File is too big',
+    FILM_EXIST:'this film is in our database',
+    YEAR_ERROR:'Year of release is out of possible gaps',
+    NOT_VALID_FIELDS:'All fields should be filled',
 };

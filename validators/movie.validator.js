@@ -5,6 +5,7 @@ const filmFormat = require('../configs/FormatsOfFilms');
 const movieValidator = Joi.object({
     title: Joi
         .string()
+        .lowercase()
         .trim()
         .required(),
     releaseYear: Joi
