@@ -37,6 +37,7 @@ module.exports = {
             next(e);
         }
     },
+
     deleteMovie: async (req, res, next) => {
         try {
             const {movie_id} = req.params;
@@ -48,6 +49,7 @@ module.exports = {
             next(e);
         }
     },
+
     loadFile: (req, res, next) => {
         try {
 
